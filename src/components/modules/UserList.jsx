@@ -1,15 +1,28 @@
 import toast from "react-hot-toast";
+import { useState } from "react";
 import { useDeleteUser } from "../../services/mutations";
 import { useGetAllUsers } from "../../services/queries";
 import styles from "./UserList.module.css";
 import { useNavigate } from "react-router-dom";
+import UserModal from "./UserModal";
 
 const UserList = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingUser, setEditingUser] = useState(null);
   const navigate = useNavigate();
   const { data, isPending, error } = useGetAllUsers();
   console.log({ data, isPending, error });
-  const editUserHandler = () => {};
   const { mutate } = useDeleteUser();
+  const openModal = (user = null) => {
+    setEditingUser(user);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setEditingUser(null);
+    setIsModalOpen(false);
+  };
+
   const deleteUserHandler = (userId) => {
     mutate(userId, {
       onSuccess: (data) => {
@@ -54,7 +67,7 @@ const UserList = () => {
               <td>{user.last_name}</td>
               <td>
                 <div className={styles.actions}>
-                  <button onClick={() => editUserHandler(user.id)}>
+                  <button onClick={() => openModal(user)}>
                     edit
                     {/* <img src="edit.svg" alt="edit" /> */}
                   </button>
@@ -65,12 +78,14 @@ const UserList = () => {
                   <button onClick={() => navigate(`/users/${user.id}`)}>
                     details
                   </button>
+                  <button onClick={() => openModal()}>Add User</button>
                 </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <UserModal isOpen={isModalOpen} onClose={closeModal} user={editingUser} />
     </div>
   );
 };

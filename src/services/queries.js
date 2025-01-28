@@ -1,8 +1,8 @@
-import {useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import api from "../configs/api";
 const useGetAllUsers = () => {
   const queryKey = ["users"];
-  const queryFn = () => api.get("/users?page=2");
+  const queryFn = () => api.get("/users");
   return useQuery({ queryKey, queryFn });
 };
 const useUserById = (userId) => {
