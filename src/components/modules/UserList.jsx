@@ -2,8 +2,10 @@ import toast from "react-hot-toast";
 import { useDeleteUser } from "../../services/mutations";
 import { useGetAllUsers } from "../../services/queries";
 import styles from "./UserList.module.css";
+import { useNavigate } from "react-router-dom";
 
 const UserList = () => {
+  const navigate = useNavigate();
   const { data, isPending, error } = useGetAllUsers();
   console.log({ data, isPending, error });
   const editUserHandler = () => {};
@@ -46,6 +48,7 @@ const UserList = () => {
           )}
           {data?.data?.map((user) => (
             <tr key={user.id}>
+              <td>{user.id}</td>
               <td>{user.email}</td>
               <td>{user.first_name}</td>
               <td>{user.last_name}</td>
@@ -58,6 +61,9 @@ const UserList = () => {
                   <button onClick={() => deleteUserHandler(user.id)}>
                     delete
                     {/* <img src="trash.svg" alt="delete" /> */}
+                  </button>
+                  <button onClick={() => navigate(`/users/${user.id}`)}>
+                    details
                   </button>
                 </div>
               </td>

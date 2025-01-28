@@ -13,4 +13,5 @@ const useDeleteUser = () => {
   };
   return useMutation({ mutationFn, onSuccess });
 };
+
 export { useLogin, useDeleteUser };

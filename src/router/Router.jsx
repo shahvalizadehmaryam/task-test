@@ -3,32 +3,37 @@ import LoginPage from "../pages/LoginPage";
 import AuthProvider from "../providers/AuthProvider";
 import Home from "../components/templates/Home";
 import { getCookie } from "../utils/cookie";
+import UserDetails from "../components/modules/UserDetails";
 
 const Router = () => {
-const token = getCookie("token");
+  const token = getCookie("token");
 
-return (
-  <>
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <AuthProvider>
-            <Home />
-          </AuthProvider>
-        }
-      />
-      <Route
-        path="/login"
-        element={token ? <Navigate to="/" /> : <LoginPage />}
-      />
-            {/* <Route
+  return (
+    <>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <AuthProvider>
+              <Home />
+            </AuthProvider>
+          }
+        />
+        <Route
+          path="/login"
+          element={token ? <Navigate to="/" /> : <LoginPage />}
+        />
+        <Route
+          path="/users/:id"
+          element={token ? <UserDetails /> : <LoginPage />}
+        />
+        {/* <Route
         path="/login"
         element={<LoginPage />}
       /> */}
-    </Routes>
-  </>
-);
+      </Routes>
+    </>
+  );
 };
 
 export default Router;
