@@ -45,7 +45,7 @@ const LoginForm = () => {
         name="email"
         value={form.email}
         onChange={changeHandler}
-        placeholder="نام کاربری"
+        placeholder="ایمیل"
       />
       <input
         type="password"

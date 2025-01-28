@@ -25,7 +25,7 @@ const Router = () => {
         />
         <Route
           path="/users/:id"
-          element={token ? <UserDetails /> : <LoginPage />}
+          element={token ? <UserDetails /> : <Navigate to="/login" />}
         />
         {/* <Route
         path="/login"

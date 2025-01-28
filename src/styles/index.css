@@ -1,0 +1,32 @@
+:root {
+  font-family: "Iranyekan", Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+body {
+  margin: auto;
+  max-width: 1400px;
+  min-height: 100vh;
+  padding: 10px;
+  color: #282828;
+  background-color: #F2F2F2;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+}
