@@ -1,9 +1,12 @@
 import './App.css'
+import TanstackQueryProvider from './providers/TanstackQueryProvider'
 
 function App() {
   return (
     <>
-      <h3>task e testi</h3>
+     <TanstackQueryProvider>
+      
+     </TanstackQueryProvider>
     </>
   )
 }
