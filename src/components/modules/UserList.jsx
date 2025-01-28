@@ -1,9 +1,22 @@
+import toast from "react-hot-toast";
+import { useDeleteUser } from "../../services/mutations";
 import { useGetAllUsers } from "../../services/queries";
 import styles from "./UserList.module.css";
 
 const UserList = () => {
   const { data, isPending, error } = useGetAllUsers();
   console.log({ data, isPending, error });
+  const editUserHandler = () => {};
+  const { mutate } = useDeleteUser();
+  const deleteUserHandler = (userId) => {
+    mutate(userId, {
+      onSuccess: (data) => {
+        console.log("data on deletinguser", data);
+        toast.error(".کاربر مورد نظر حذف شد");
+      },
+      onError: (error) => console.log("error in onError", error),
+    });
+  };
   return (
     <div>
       <table className={styles.products}>
@@ -38,14 +51,14 @@ const UserList = () => {
               <td>{user.last_name}</td>
               <td>
                 <div className={styles.actions}>
-                  <button>edit</button>
-                  <button>delete</button>
-                  {/* <button onClick={() => showEditModal(productItem.id)}>
-                    <img src="edit.svg" alt="edit" />
+                  <button onClick={() => editUserHandler(user.id)}>
+                    edit
+                    {/* <img src="edit.svg" alt="edit" /> */}
                   </button>
-                  <button onClick={() => showDeleteModal(productItem.id)}>
-                    <img src="trash.svg" alt="delete" />
-                  </button> */}
+                  <button onClick={() => deleteUserHandler(user.id)}>
+                    delete
+                    {/* <img src="trash.svg" alt="delete" /> */}
+                  </button>
                 </div>
               </td>
             </tr>
