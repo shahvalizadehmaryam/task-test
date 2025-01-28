@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { getCookie } from "utils/cookie";
+import { getCookie } from "../utils/cookie";
 
 // eslint-disable-next-line
 function AuthProvider({ children }) {

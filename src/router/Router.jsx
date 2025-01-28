@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import LoginPage from "pages/LoginPage";
-import AuthProvider from "providers/AuthProvider";
+import LoginPage from "../pages/LoginPage";
+import AuthProvider from "../providers/AuthProvider";
 import Home from "../components/templates/Home";
 import { getCookie } from "../utils/cookie";
 

@@ -1,7 +1,7 @@
 import styles from "./LoginForm.module.css";
 import { useState } from "react";
-import { useLogin } from "services/mutations";
-import { setCookie } from "utils/cookie";
+import { useLogin } from "../../services/mutations";
+import { setCookie } from "../../utils/cookie";
 import { Link, useNavigate } from "react-router-dom";
 // import toast from "react-hot-toast";
 const LoginForm = () => {
