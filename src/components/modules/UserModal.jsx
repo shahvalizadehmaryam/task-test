@@ -11,8 +11,8 @@ const UserModal = ({ isOpen, onClose, user = null }) => {
 
   useEffect(() => {
     if (user) {
-      setName(user.name);
-      setJob(user.job);
+      setName(user.name || "");
+      setJob(user.job || "");
     }
   }, [user]);
 
