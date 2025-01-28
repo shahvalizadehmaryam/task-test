@@ -1,0 +1,54 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e4e4e4;
+    width: 470px;
+    height: 523px;
+    margin: auto;
+    border-radius: 40px;
+    background-color: #fff;
+    padding: 10px 25px;
+  }
+  .form input {
+    margin-bottom: 10px;
+    background-color: #f2f2f2;
+    border-radius: 15px;
+    outline: none;
+    border: none;
+    padding: 13px 15px;
+  }
+  
+  .logoPart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 60px;
+    margin-top: 50px;
+  }
+  .logoPart span {
+    font-weight: 500;
+    line-height: 37px;
+    font-size: 1.5rem;
+  }
+  .authBtn {
+    margin-top: 35px;
+    width: 100%;
+    border-radius: 15px;
+    padding: 10px;
+    border: none;
+    background-color: #55a3f0;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #fff;
+    line-height: 32px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  .accountLink{
+      color: #3A8BED;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.5rem;
+  }
+  
