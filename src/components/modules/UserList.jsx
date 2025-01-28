@@ -7,7 +7,8 @@ import UserModal from "./UserModal";
 import { MdDeleteForever } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import { IoSearch } from "react-icons/io5";
-import Cookies from "js-cookie";
+import { deleteCookie } from "../../utils/cookie";
+import LoadingSpinner from "./LoadingSpinner";
 
 const UserList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,10 +35,12 @@ const UserList = () => {
       onError: (error) => console.log("error in onError", error),
     });
   };
-  // const exitUserHandler = () => {
-  //   Cookies.remove("token");
-  //   navigate("/login");
-  // };
+  const exitUserHandler = () => {
+    deleteCookie("token");
+    localStorage.clear();
+    sessionStorage.clear();
+    navigate("/login", { replace: true });
+  };
 
   return (
     <div className="p-4">
@@ -74,10 +77,10 @@ const UserList = () => {
             <tbody>
               {isPending && (
                 <tr>
-                  <td colSpan="5" className="text-center py-4 text-gray-500">
-                    Loading...
-                  </td>
-                </tr>
+                <td colSpan="5" className="text-center py-4">
+                  <LoadingSpinner />
+                </td>
+              </tr>
               )}
               {error && (
                 <tr>
