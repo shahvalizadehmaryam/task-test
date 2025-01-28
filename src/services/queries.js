@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import api from "../configs/api";
 const useGetAllUsers = (page) => {
-  const queryKey = ["users"];
+  const queryKey = ["users", page];
   const queryFn = () => api.get(`/users?page=${page}`);
   return useQuery({ queryKey, queryFn });
 };

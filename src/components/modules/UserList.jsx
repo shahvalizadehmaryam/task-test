@@ -9,13 +9,17 @@ import { FiEdit } from "react-icons/fi";
 import { IoSearch } from "react-icons/io5";
 import LoadingSpinner from "./LoadingSpinner";
 import Cookies from "js-cookie";
+import Pagination from "./Pagination";
 
 const UserList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
+  const [page, setPage] = useState(1); // Pagination state
   const navigate = useNavigate();
-  const { data, isPending, error } = useGetAllUsers(1);
+
+  const { data, isPending, error } = useGetAllUsers(page);
   const { mutate } = useDeleteUser();
+  console.log("users", data);
 
   const openModal = (user = null) => {
     setEditingUser(user);
@@ -35,19 +39,19 @@ const UserList = () => {
       onError: (error) => console.log("error in onError", error),
     });
   };
-  const exitUserHandler = () => {
-    Cookies.remove("token"); // Replace 'token' with your actual cookie name
 
+  const exitUserHandler = () => {
+    Cookies.remove("token");
     window.location.href = "/login";
   };
 
   return (
     <div className="p-4">
-      <div className="text-sky-800 font-semibold text-sm lg:text-xl w-52 pb-6  text-center">
+      <div className="text-sky-800 font-semibold text-sm lg:text-xl w-52 pb-6 text-center">
         لیست کاربران
         <hr className="bg-sky-800 h-[2px] mt-1" />
       </div>
-      <div className=" flex gap-x-4 justify-start">
+      <div className="flex gap-x-4 justify-start">
         <button
           onClick={() => openModal()}
           className="px-4 py-2 font-bold bg-blue-500 text-white rounded hover:bg-blue-600"
@@ -105,7 +109,6 @@ const UserList = () => {
                       <button onClick={() => navigate(`/users/${user.id}`)}>
                         <IoSearch className="text-sky-700 text-xl ml-2" />
                       </button>
-
                       <button onClick={() => openModal(user)}>
                         <FiEdit className="text-blue-500 text-xl" />
                       </button>
@@ -121,6 +124,7 @@ const UserList = () => {
         </div>
       </div>
 
+      <Pagination page={page} setPage={setPage} />
       <UserModal isOpen={isModalOpen} onClose={closeModal} user={editingUser} />
     </div>
   );
