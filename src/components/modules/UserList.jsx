@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDeleteUser } from "../../services/mutations";
 import { useGetAllUsers } from "../../services/queries";
 import { useNavigate } from "react-router-dom";
@@ -7,14 +7,14 @@ import UserModal from "./UserModal";
 import { MdDeleteForever } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import { IoSearch } from "react-icons/io5";
-import { deleteCookie } from "../../utils/cookie";
 import LoadingSpinner from "./LoadingSpinner";
+import Cookies from "js-cookie";
 
 const UserList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
   const navigate = useNavigate();
-  const { data, isPending, error } = useGetAllUsers();
+  const { data, isPending, error } = useGetAllUsers(1);
   const { mutate } = useDeleteUser();
 
   const openModal = (user = null) => {
@@ -36,10 +36,9 @@ const UserList = () => {
     });
   };
   const exitUserHandler = () => {
-    deleteCookie("token");
-    localStorage.clear();
-    sessionStorage.clear();
-    navigate("/login", { replace: true });
+    Cookies.remove("token"); // Replace 'token' with your actual cookie name
+
+    window.location.href = "/login";
   };
 
   return (
@@ -77,14 +76,17 @@ const UserList = () => {
             <tbody>
               {isPending && (
                 <tr>
-                <td colSpan="5" className="text-center py-4">
-                  <LoadingSpinner />
-                </td>
-              </tr>
+                  <td colSpan="5" className="text-center py-4">
+                    <LoadingSpinner />
+                  </td>
+                </tr>
               )}
               {error && (
                 <tr>
-                  <td colSpan="5" className="text-center py-4 text-red-500">
+                  <td
+                    colSpan="5"
+                    className="text-center py-4 text-red-800 font-bold"
+                  >
                     داده ای یافت نشد.
                   </td>
                 </tr>

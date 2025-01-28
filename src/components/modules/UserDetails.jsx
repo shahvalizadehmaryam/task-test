@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useUserById } from "../../services/queries";
+import LoadingSpinner from "./LoadingSpinner";
 
 const UserDetails = () => {
   const { id } = useParams();
@@ -8,7 +9,7 @@ const UserDetails = () => {
   if (isPending) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <h3 className="text-gray-500 text-lg">Loading...</h3>
+        <h3 className="text-gray-500 text-lg"> <LoadingSpinner /></h3>
       </div>
     );
   }
