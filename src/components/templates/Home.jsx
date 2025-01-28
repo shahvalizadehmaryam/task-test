@@ -1,8 +1,9 @@
+import UsersPage from "../../pages/users";
 
 const Home = () => {
   return (
     <>
-     <h3>home page</h3>
+     <UsersPage />
     </>
   );
 };
