@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 :root {
   font-family: "Iranyekan", Inter, system-ui, Avenir, Helvetica, Arial,
     sans-serif;
@@ -11,7 +14,7 @@ body {
   min-height: 100vh;
   padding: 10px;
   color: #282828;
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
 }
 
 * {

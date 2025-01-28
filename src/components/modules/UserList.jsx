@@ -5,6 +5,8 @@ import { useGetAllUsers } from "../../services/queries";
 import styles from "./UserList.module.css";
 import { useNavigate } from "react-router-dom";
 import UserModal from "./UserModal";
+import { MdDeleteForever } from "react-icons/md";
+import { FiEdit } from "react-icons/fi";
 
 const UserList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,8 +42,8 @@ const UserList = () => {
             <th>شناسه کاربری</th>
             <th>ایمیل</th>
             <th>نام کاربر</th>
-            <th>نام خانوادگی کالا</th>
-            <th></th>
+            <th>نام خانوادگی </th>
+            <th>عملیات</th>
           </tr>
         </thead>
         <tbody>
@@ -68,12 +70,10 @@ const UserList = () => {
               <td>
                 <div className={styles.actions}>
                   <button onClick={() => openModal(user)}>
-                    edit
-                    {/* <img src="edit.svg" alt="edit" /> */}
+                    <FiEdit className="text-blue-500 text-xl" />
                   </button>
                   <button onClick={() => deleteUserHandler(user.id)}>
-                    delete
-                    {/* <img src="trash.svg" alt="delete" /> */}
+                    <MdDeleteForever className="text-red-500 text-2xl" />
                   </button>
                   <button onClick={() => navigate(`/users/${user.id}`)}>
                     details
