@@ -2,11 +2,11 @@ import styles from "./LoginForm.module.css";
 import { useState } from "react";
 import { useLogin } from "../../services/mutations";
 import { setCookie } from "../../utils/cookie";
-import { Link, useNavigate } from "react-router-dom";
-// import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 const LoginForm = () => {
   const [form, setForm] = useState({
-    username: "",
+    email: "",
     password: "",
   });
   const { mutate } = useLogin();
@@ -18,16 +18,18 @@ const LoginForm = () => {
   };
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    const { username, password } = form;
+    const { email, password } = form;
+    console.log("email", email);
+    console.log("pass", password);
 
-    if (!username || !password)
+    if (!email || !password)
       return alert("User Name and Password is Necessary");
 
     mutate(form, {
       onSuccess: (data) => {
-        console.log(data);
+        console.log("data in loginform", data);
         setCookie("token", data?.token);
-        // toast.success("ورود موفقیت امیز");
+        toast.success("ورود موفقیت امیز");
         navigate("/");
       },
       onError: (error) => console.log(error.response.data.message),
@@ -36,13 +38,12 @@ const LoginForm = () => {
   return (
     <form onSubmit={formSubmitHandler} className={styles.form}>
       <div className={styles.logoPart}>
-        <img src="union.svg" alt="logo" />
         <span>فرم ورود</span>
       </div>
       <input
         type="text"
-        name="username"
-        value={form.username}
+        name="email"
+        value={form.email}
         onChange={changeHandler}
         placeholder="نام کاربری"
       />
@@ -56,9 +57,6 @@ const LoginForm = () => {
       <button type="submit" className={styles.authBtn}>
         ورود
       </button>
-      <Link to="/register">
-        <span className={styles.accountLink}>ایجاد حساب کاربری؟</span>
-      </Link>
     </form>
   );
 };

@@ -22,6 +22,10 @@ return (
         path="/login"
         element={token ? <Navigate to="/" /> : <LoginPage />}
       />
+            {/* <Route
+        path="/login"
+        element={<LoginPage />}
+      /> */}
     </Routes>
   </>
 );
